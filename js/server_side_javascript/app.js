@@ -15,6 +15,12 @@ app.get('/jiji', (req, res) => {
 app.get('/git', (req, res) => {
   res.send('gitgit');
 });
+app.get('/git', (req, res) => {
+  res.send('gitgit');
+});
+app.get('/git', (req, res) => {
+  res.send('gitgit');
+});
 app.listen(3000, function(){
   console.log('Conneted 3000 port!');
 });
