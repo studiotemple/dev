@@ -11,7 +11,10 @@ app.get('/babo', (req, res) => {
 });
 app.get('/jiji', (req, res) => {
   res.send('jiji');
-})
+});
+app.get('/git', (req, res) => {
+  res.send('gitgit');
+});
 app.listen(3000, function(){
   console.log('Conneted 3000 port!');
 });
