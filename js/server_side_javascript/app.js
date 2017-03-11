@@ -1,8 +1,33 @@
 const express = require('express');
 const app = express();
+app.locals.pretty = true;
+app.set('view engine', 'jade');
+app.set('views', './views');
 app.use(express.static('public'));
+app.get('/template', (req, res) => {
+  res.render('temp', {time: Date(),
+    title: 'jade'
+   });
+});
 app.get('/', function(req, res){
     res.send('Hello home page');;
+});
+app.get('/topic/:id', (req, res) => {
+  var topics = [
+    'javascript is...',
+    'nodejs is...',
+    'express is...'
+  ];
+  var output = `
+  <a href="/topic/0">javascript</a><br>
+  <a href="/topic/1">node</a><br>
+  <a href="/topic/2">express</a><br>
+  ${topics[req.params.id]}
+  `
+  res.send(output);
+});
+app.get('/topic/:id/:mode', (req, res) => {
+  res.send(req.params.id+','+req.params.mode);
 });
 app.get('/dynamic', function(req, res){
   var lis = '';
