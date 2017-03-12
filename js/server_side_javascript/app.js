@@ -1,9 +1,20 @@
 const express = require('express');
 const app = express();
+
+var bodyParser = require('body-parser');
+
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 app.locals.pretty = true;
+
 app.set('view engine', 'jade');
-app.set('views', './views');
-app.use(express.static('public'));
+app.set('views', 'views_file');
+app.use(express.static('public_file'));
+app.get('/topic/new', (req, res) => {
+  res.render('new');
+});
+
+
 app.get('/template', (req, res) => {
   res.render('temp', {time: Date(),
     title: 'jade'
@@ -12,23 +23,20 @@ app.get('/template', (req, res) => {
 app.get('/', function(req, res){
     res.send('Hello home page');;
 });
-app.get('/topic/:id', (req, res) => {
-  var topics = [
-    'javascript is...',
-    'nodejs is...',
-    'express is...'
-  ];
-  var output = `
-  <a href="/topic/0">javascript</a><br>
-  <a href="/topic/1">node</a><br>
-  <a href="/topic/2">express</a><br>
-  ${topics[req.params.id]}
-  `
-  res.send(output);
+app.get('/form', (req, res) => {
+    res.render('form');
 });
-app.get('/topic/:id/:mode', (req, res) => {
-  res.send(req.params.id+','+req.params.mode);
+app.get('/form_receiver', (req, res) => {
+  var title = req.query.title;
+  var description = req.query.description;
+  res.send(title + ',' + description);z
 });
+app.post('/form_receiver', (req, res) => {
+  var title = req.body.title;
+  var description= req.body.description;
+  res.send(title + ',' + description);
+});
+
 app.get('/dynamic', function(req, res){
   var lis = '';
   for(var i=0; i<5; i++){
