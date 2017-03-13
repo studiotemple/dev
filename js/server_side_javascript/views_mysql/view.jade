@@ -14,8 +14,15 @@ html
         h2= topic.title
         = topic.description
         div= 'by ' + topic.author
+        div= topic.id + '번 게시물'
       else
         h2 Welcome
         | This is server side javascript.
-    div
-      a(href='/topic/add') 글쓰기
+    ul
+      li
+        a(href='/topic/add') 글쓰기
+      if topic
+        li
+          a(href='/topic/'+topic.id+'/edit') 수정
+        li
+          a(href='/topic/'+topic.id+'/delete') 삭제
