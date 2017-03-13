@@ -16,8 +16,8 @@ const fs = require('fs');
 var mysql      = require('mysql');
 var conn = mysql.createConnection({
   host     : 'localhost',
-  user     : '',
-  password : '',
+  user     : 'root',
+  password : 'nirvana1998',
   database : 'os'
 });
 
